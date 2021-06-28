@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Home</title>
+</head>
+
+<body> 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <label class="navbar-brand" style="font-weight: bold;">ToDo</label>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/About">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <form action="/" method="POST">
+            <h2 class="display-4">Add ToDo</h2>
+            <div class="form-group">
+                <label for="Desc">ToDo title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter your title">
+                {% with messages = get_flashed_messages() %}  
+                    {% if messages %}  
+                        {% for message in messages %}  
+                            <p><b>{{ message }}</b></p>  
+                        {% endfor %}  
+                    {% endif %}  
+                {% endwith %}
+                <br>
+                <label for="Desc">ToDo description</label>
+                <input type="text" class="form-control"  name="desc" placeholder="Enter about your todo (optional)">
+            </div>
+            <p style="text-align: center;">You have to fill ToDo title field before submit.</p>
+            <button type="submit" class="btn btn-primary" style="margin-left: 46.5%;">Submit</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <h2>Your ToDos</h2>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th style="text-align: center;" scope="col">Sno</th>
+                <th style="text-align: center;" scope="col">Title</th>
+                <th style="text-align: center;" scope="col">Desc</th>
+                <th style="text-align: center;" scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for ToDo in alltodo %}
+                <tr>
+                    <th style="text-align: center;" scope="row">{{loop.index}}</th>
+                    <td style="text-align: center;">{{ToDo.title}}</td>
+                    <td style="text-align: center;">{{ToDo.desc}}</td>
+                    <td style="text-align: center;">{{ToDo.date}}</td>
+                    <td>
+                        <a style="margin: 20%;" href="/update/{{ToDo.sno}}" type="button" class="btn btn-outline-primary btn-sm mx-1">Update</button>
+                        <a style="margin: 20%;" href="/delete/{{ToDo.sno}}" type="button" class="btn btn-outline-primary btn-sm mx-1">Delete</button>
+                    </td>
+                    </tr>
+                 
+                {% endfor %}
+              </tbody>
+          </table>
+    </div>
+    <footer>
+        <hr>
+        <div class="jumbotron">
+            <h1 style="text-align: center;" class="display-4"><b>About US</b></h1>
+            <p style="text-align: center;" class="lead">This is a simple ToDo webapp,<br> here we can add our todos and make our day better.</p>
+            <p style="text-align: center;">Developed by Anuj Shukla.</p>
+            <hr class="my-4">
+            <p style="text-align: center;">Press on the below About button to learn more about this project.</p>
+            <p class="lead">
+              <a style="margin-left: 45.5%;" class="btn btn-primary btn-lg" href="/About" role="button">Learn more</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
